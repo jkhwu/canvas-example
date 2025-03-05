@@ -1,0 +1,272 @@
+# Explore YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/canvas-dashboards
+
+type: canvas
+title: "Canvas Dashboard"
+defaults:
+  time_range: PT24H
+  comparison_mode: time
+layout:
+  rows:
+    - items: "3"
+      layout: "12"
+      height: 610
+    - items: 9, 11
+      layout: 6, 6
+      height: 434
+    - items: "14"
+      layout: "12"
+      height: 200
+items:
+  - component:
+      kpi:
+        metrics_view: auction_metrics
+        measure: requests
+        comparison:
+          - delta
+          - percent_change
+    height: 4
+    width: 6
+    x: 0
+    y: 0
+  - component:
+      kpi:
+        metrics_view: auction_metrics
+        measure: avg_bid_floor
+        comparison:
+          - delta
+          - percent_change
+    height: 4
+    width: 6
+    x: 6
+    y: 0
+  - component:
+      kpi:
+        metrics_view: bids_metrics
+        measure: total_bids
+        comparison:
+          - delta
+          - percent_change
+    height: 4
+    width: 6
+    x: 0
+    y: 4
+  - component:
+      area_chart:
+        metrics_view: bids_metrics
+        title: ""
+        description: Chart caption here
+        color:
+          field: player_size
+          type: nominal
+        x:
+          field: __time
+          type: temporal
+        y:
+          field: total_bids
+          type: quantitative
+    height: 4
+    width: 6
+    x: 6
+    y: 4
+  - component:
+      markdown:
+        title: ""
+        description: ""
+        content: |
+          #header text
+        alignment:
+          horizontal: left
+          vertical: middle
+    height: 2
+    width: 3
+    x: 0
+    y: 8
+  - component:
+      markdown:
+        title: ""
+        description: ""
+        content: |-
+          # Markdown Text
+          ## H2 Markdown text 
+          ### H3 Markdown text  
+          #### H4 markdown text. 
+          This chart above shows what happened the 
+        alignment:
+          horizontal: left
+          vertical: top
+    height: 2
+    width: 3
+    x: 3
+    y: 8
+  - component:
+      image:
+        url: https://cdn.prod.website-files.com/659ddac460dbacbdc813b204/660b0f851ecf580044359ed4_rill_logo_indigo.svg
+    height: 2
+    width: 2
+    x: 6
+    y: 8
+  - component:
+      table:
+        metrics_view: auction_metrics
+        measures:
+          - requests
+        row_dimensions:
+          - app_site_name
+        col_dimensions:
+          - app_site_cat
+          - pub_name
+        title: This is a table title
+        description: This is a table caption
+    height: 10
+    width: 4
+    x: 8
+    y: 8
+  - component:
+      stacked_bar:
+        metrics_view: bids_metrics
+        title: ""
+        description: ""
+        color:
+          field: app_or_site
+          type: nominal
+        vl_config: |-
+          {
+            "legend": {
+              "orient": "top"
+            },
+            "range": {
+              "category": [
+                "#D63946",
+                "#457B9D",
+                "#F4A261",
+                "#2A9D8F",
+                "#8D99AE"
+              ]
+            },
+            "axisX": {
+              "grid": false
+            }
+          }
+        x:
+          field: device_os
+          type: nominal
+        y:
+          field: video_completion_rate
+          type: quantitative
+    height: 4
+    width: 6
+    x: 0
+    y: 18
+  - component:
+      area_chart:
+        metrics_view: auction_metrics
+        title: ""
+        description: ""
+        color:
+          field: platform_browser
+          type: nominal
+        vl_config: |-
+          {
+            "legend": {
+              "orient": "right"
+            },
+            "range": {
+              "category": [
+                "#D63946",
+                "#457B9D",
+                "#F4A261",
+                "#2A9D8F",
+                "#8D99AE"
+              ]
+            },
+            "axisX": {
+              "grid": false
+            }
+          }
+        x:
+          field: app_site_name
+          showAxisTitle: true
+          type: nominal
+        y:
+          field: requests
+          showAxisTitle: true
+          type: quantitative
+    height: 4
+    width: 6
+    x: 6
+    y: 18
+  - component:
+      kpi:
+        metrics_view: bids_metrics
+        measure: clicks
+        comparison:
+          - delta
+        sparkline: right
+    height: 4
+    width: 6
+    x: 0
+    y: 22
+  - component:
+      line_chart:
+        metrics_view: bids_metrics
+        title: ""
+        description: Optional caption
+        color:
+          field: auction_type
+          type: nominal
+        vl_config: null
+        x:
+          field: device_os
+          type: nominal
+        y:
+          field: video_completion_rate
+          type: quantitative
+    height: 4
+    width: 6
+    x: 6
+    y: 22
+  - component:
+      markdown:
+        content: Markdown Text
+        alignment:
+          vertical: middle
+          horizontal: left
+    height: 2
+    width: 3
+    x: 0
+    y: 26
+  - component:
+      kpi_grid:
+        metrics_view: auction_data_model_metrics
+        measures:
+          - total_has_bid_floor_measure
+          - maximum_bid_floor_measure
+          - distinct_app_site_names_measure
+        comparison:
+          - delta
+          - percent_change
+        description: by Day compared to previous period, for 3 country values
+        dimension_filters: app_site_domain IN
+          ('01f5d9a9c21bd63da392cb59ec8e07fa.safeframe.googlesyndication.com','077radio.page.shoutcast.com')
+        sparkline: right
+        time_filters: tr=rill-WTD&compare_tr=rill-PW&grain=hour
+        title: Last 24 hours
+    height: 4
+    width: 6
+    x: 3
+    y: 26
+  - component:
+      kpi_grid:
+        metrics_view: auction_data_model_metrics
+        measures:
+          - total_bid_requests_measure
+        comparison:
+          - delta
+          - percent_change
+    height: 4
+    width: 6
+    x: 0
+    y: 30
+filters:
+  enable: true

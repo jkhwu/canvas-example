@@ -1,0 +1,64 @@
+# Explore YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/canvas-dashboards
+
+type: canvas
+title: "Canvas Dashboard"
+defaults:
+  time_range: PT24H
+  comparison_mode: time
+rows:
+  - items:
+      - kpi_grid:
+          metrics_view: auction_data_model_metrics
+          measures:
+            - total_has_bid_floor_measure
+            - minimum_bid_floor_measure
+            - maximum_bid_floor_measure
+            - distinct_app_site_names_measure
+          comparison:
+            - delta
+            - percent_change
+          sparkline: bottom
+        width: 12
+    height: 460px
+  - items:
+      - markdown:
+          title: ""
+          description: ""
+          content: >-
+            Start writing in **Markdown** and see your text beautifully
+            formatted! 🚀
+
+
+            Start writing in **Markdown** and see your text beautifully
+            formatted! 🚀
+
+
+            Start writing in **Markdown** and see your text beautifully
+            formatted! 🚀
+
+            Start writing in **Markdown** and see your text beautifully
+            formatted! 🚀
+          alignment:
+            horizontal: left
+            vertical: top
+        width: 12
+    height: 80px
+  - items:
+      - image:
+          url: https://cdn.prod.website-files.com/659ddac460dbacbdc813b204/660b0f85094eb576187342cf_rill_logo_sq_gradient.svg
+          title: Test image title
+          description: Test image caption
+        width: 12
+    height: 300px
+  - items:
+      - kpi_grid:
+          metrics_view: bids_metrics
+          measures:
+            - total_bids
+          comparison:
+            - delta
+          description: This horiz orientation needs some styling adjustments
+          sparkline: right
+        width: 12
+    height: 200px
